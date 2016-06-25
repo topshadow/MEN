@@ -5,8 +5,8 @@ var config = require('../config/config'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     methodOverride = require('method-override'),
-    fileroute = require('./file-route');
-    ;
+    fileroute = require('./rest-route');
+    
 
 module.exports = function() {
     var app = exprsss();

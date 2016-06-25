@@ -44,7 +44,7 @@ module.exports = function (app) {
             }
         }
     }
-
+    
 fs.readdir(routesDir, function(err, files) {
     if (err) {
         console.log(err);
