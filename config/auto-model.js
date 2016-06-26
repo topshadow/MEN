@@ -6,9 +6,8 @@ import fs from 'fs';
 var routesDir = path.dirname(__dirname)+'/app/models';
 
 
-/**文件路由层**/
-module.exports = function () {
-    //数据库对象,只能添加注册一张表一次
+function createDb() {
+//数据库对象,只能添加注册一张表一次
     var handler = {
         set: function (target, key, value, receiver) {
             if(key in target){
@@ -21,25 +20,22 @@ module.exports = function () {
         }
     };
     var db = new Proxy({}, handler);
-    function loadFile(filePath) {
+
+  function loadFile(filePath) {
         var dbSechma = require(filePath);
+
         for(var Sechma in dbSechma){
-
-            db[Sechma]='as';
+            db[Sechma]=dbSechma[Sechma];
         }
-    }
+   
+  }
 
 
-    fs.readdir(routesDir, function(err, files) {
-        if (err) {
-            console.log(err);
-            return ;
-        }
+    var files = fs.readdirSync(routesDir);
 
         files.forEach(function(path) {
             //routes目录下的文件路径
             var filePath = routesDir + "/" + path;
-
             fs.stat(filePath, function(err, stats) {
                 if (err) {
                     return ;
@@ -54,8 +50,9 @@ module.exports = function () {
                 }
             })
         });
-
-        return db;
-    });
+    return db;
 
 }
+
+/**文件路由层**/
+module.exports = createDb();

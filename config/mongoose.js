@@ -3,8 +3,7 @@ var config  = require('./config'),
     mongoose = require('mongoose');
 var db= function(){
     var db = mongoose.connect(config.db);
-   var models = require('./auto-model')();
-    console.log(models);
+    require('../config/auto-model');
     return db;
 };
 module.exports = db;

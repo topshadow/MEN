@@ -8,6 +8,6 @@ var UserSechema = new Schema({
     username : String,
     password : String
 });
-mongoose.model('User',UserSechema);
+UserSechema= mongoose.model('User',UserSechema);
 
 module.exports = {UserSechema};

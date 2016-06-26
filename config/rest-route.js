@@ -15,9 +15,9 @@ module.exports = function (app) {
         var routeObj = require(filePath);
         if(routeObj&&routeObj.platform&&routeObj&&routeObj.service) {
             //导出对象的platform对象,service服务,action请求
-            console.log(`loading route parttern:  /${routeObj.platform}/${routeObj.service}/:action`);
+            console.log(`loading route parttern:  /${routeObj.platform}/${routeObj.service}${routeObj.db}/:action`);
             app.get(`/${routeObj.platform}/${routeObj.service}/:action`, function (req, res, next) {
-                routeObj.doAction(req.params.action)(req, res);
+             routeObj.doAction(req.params.action)(req,res);
             });
         }else{
             var errorFile =`file: ${filePath}  not export right route Object`;
